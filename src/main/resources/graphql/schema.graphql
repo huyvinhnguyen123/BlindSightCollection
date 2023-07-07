@@ -1,0 +1,25 @@
+type Query {
+    # account
+    getAllAccounts: [Account!]
+}
+
+type Mutation {
+	# account
+	registerAccount(username: String!, email: String!, password: String!): Account!
+}
+
+# account
+type Account {
+	userId: String!,
+	username: String!,
+	email: String!,
+	password: String!,
+	roles: [Role!]!
+}
+
+type Role {
+	account: Account!,
+	roleId: ID!,
+	roleName: String!,
+	roleDescription: String,
+}
