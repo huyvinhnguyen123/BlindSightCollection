@@ -58,6 +58,13 @@ public class RandomId {
         return name + nextId;
     }
 
+    /**
+     * Random code
+     *
+     * @param name - input name
+     * @param len - input length
+     * @return - code
+     */
     public static String randomSimpleCode(String name, int len) {
         String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         StringBuilder sb = new StringBuilder(len);

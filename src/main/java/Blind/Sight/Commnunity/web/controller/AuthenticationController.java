@@ -4,7 +4,6 @@ import Blind.Sight.Commnunity.config.security.JwtUtil;
 import Blind.Sight.Commnunity.domain.service.UserService;
 import Blind.Sight.Commnunity.dto.user.LoginInput;
 import Blind.Sight.Commnunity.dto.user.UserDataInput;
-import Blind.Sight.Commnunity.exception.CustomException;
 import Blind.Sight.Commnunity.web.controller.exception.HandleRequest;
 import Blind.Sight.Commnunity.web.response.LoginResponse;
 import Blind.Sight.Commnunity.web.response.common.ResponseDto;
@@ -57,9 +56,7 @@ public class AuthenticationController {
 
         String token = userService.login(loginInput, authenticationManager, jwtUtil);
         String refreshToken = UUID.randomUUID().toString();
-
         LoginResponse loginResponse = LoginMapper.mapToLogin(token, refreshToken);
-
         log.info("Login successfully");
         return ResponseEntity.ok(ResponseDto.build().withData(loginResponse));
     }

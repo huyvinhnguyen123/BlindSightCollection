@@ -3,9 +3,7 @@ package Blind.Sight.Commnunity.web.response.mapper;
 import Blind.Sight.Commnunity.web.response.LoginResponse;
 
 public class LoginMapper {
-
     private LoginMapper(){}
-
     public static LoginResponse mapToLogin(String token, String refreshToken) {
         return LoginResponse.builder()
                 .token(token)

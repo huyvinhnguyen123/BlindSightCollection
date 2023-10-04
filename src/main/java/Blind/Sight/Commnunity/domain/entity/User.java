@@ -4,9 +4,7 @@ import Blind.Sight.Commnunity.util.common.DeleteFlag;
 import Blind.Sight.Commnunity.util.common.LockFlag;
 import com.google.common.collect.Lists;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,19 +16,17 @@ import java.util.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "Users")
 public class User implements UserDetails {
     @Id
     @Column(name = "user_id", updatable = false)
-    private String userId = UUID.randomUUID().toString();
+    private String userId;
     @Column(unique = true, nullable = false)
     private String userName;
     @Column(unique = true, nullable = false)
     private String email;
-    @Column
+    @Column(nullable = false)
     private LocalDate birthDate;
     @Column(nullable = false)
     private String password;
@@ -45,11 +41,12 @@ public class User implements UserDetails {
     @Column(name = "old_login_id")
     private String oldLoginId;
 
-    public User(String userId) {
-        this.userId = userId;
+    public User() {
+        this.userId = UUID.randomUUID().toString();
     }
 
     public User(String userName, String email, String role) {
+        this.userId = UUID.randomUUID().toString();
         this.userName = userName;
         this.email = email;
         this.role = role;

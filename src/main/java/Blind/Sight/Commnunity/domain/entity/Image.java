@@ -17,6 +17,8 @@ public class Image {
     @Column(name = "image_id", updatable = false)
     private String imageId;
     @Column(nullable = false)
+    private String imagePathId;
+    @Column(nullable = false)
     private String imageName;
     @Column(nullable = false)
     private String imagePath;
@@ -25,8 +27,9 @@ public class Image {
         this.imageId = RandomId.generateCounterIncrement("Image-");
     }
 
-    public Image(String name, String path) {
+    public Image(String pathId, String name, String path) {
         this.imageId = RandomId.generateCounterIncrement("Image-");
+        this.imagePathId = pathId;
         this.imageName = name;
         this.imagePath = path;
     }

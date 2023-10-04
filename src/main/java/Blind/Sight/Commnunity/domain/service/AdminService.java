@@ -7,6 +7,7 @@ import Blind.Sight.Commnunity.dto.user.UserDataInput;
 import Blind.Sight.Commnunity.util.common.DeleteFlag;
 import Blind.Sight.Commnunity.util.common.LockFlag;
 import Blind.Sight.Commnunity.util.common.RoleData;
+import Blind.Sight.Commnunity.util.format.CustomDateTimeFormatter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class AdminService {
     public void createAdmin(UserDataInput userDataInput) {
         User user = new User();
         user.setUserName(userDataInput.getName());
+        user.setBirthDate(CustomDateTimeFormatter.dateOfBirthFormatter(userDataInput.getBirthDate()));
         user.setEmail(userDataInput.getEmail());
         user.setPassword(PasswordEncrypt.bcryptPassword(userDataInput.getPassword()));
         user.setRole(RoleData.ADMIN.getRole());
@@ -29,5 +31,7 @@ public class AdminService {
         log.info("Save new admin success");
 
         log.info("Register new admin success");
+
+        log.info("birthdate: {}", user.getBirthDate());
     }
 }

@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 public class CustomDateTimeFormatter {
 
     private CustomDateTimeFormatter() {
-        throw new IllegalStateException("Utility class");
     }
 
     public static LocalDate dateOfBirthFormatter(String dateString) {

@@ -10,7 +10,7 @@ import java.util.Map;
 public class ErrorMapper {
     private static final Map<Class<? extends Exception>, CustomErrorResponse> errorMapping = new HashMap<>();
 
-   static {
+    static {
        errorMapping.put(HttpClientErrorException.Forbidden.class,
                new CustomErrorResponse(HttpStatus.FORBIDDEN, "Forbidden")); // 403
        errorMapping.put(HttpClientErrorException.Unauthorized.class,
@@ -26,15 +26,15 @@ public class ErrorMapper {
        errorMapping.put(HttpClientErrorException.TooManyRequests.class,
                new CustomErrorResponse(HttpStatus.TOO_MANY_REQUESTS, "Too Many Requests")); // 429
 
-   }
+    }
 
-   public static CustomErrorResponse getCustomErrorResponse(Exception ex) {
+    public static CustomErrorResponse getCustomErrorResponse(Exception ex) {
         CustomErrorResponse customErrorResponse = errorMapping.get(ex.getClass());
         if(customErrorResponse == null) {
             customErrorResponse = new CustomErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Unknown error");
         }
         return  customErrorResponse;
-   }
+    }
 
     private ErrorMapper(){}
 }

@@ -26,6 +26,7 @@ public class JwtUtil {
         // create token from build token method below
         Map<String, Object> claims = new HashMap<>();
         claims.put("username",user.getUsername());
+        claims.put("birthDate", user.getBirthDate());
         claims.put("email",user.getEmail());
         claims.put("role",user.getRole());
 

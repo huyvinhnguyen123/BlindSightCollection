@@ -1,10 +1,10 @@
 package Blind.Sight.Commnunity.web.controller.exception;
 
-import Blind.Sight.Commnunity.exception.CustomException;
 import Blind.Sight.Commnunity.web.response.common.CustomErrorResponse;
 import Blind.Sight.Commnunity.web.response.common.ResponseDto;
 
 import Blind.Sight.Commnunity.web.response.mapper.ErrorMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -12,6 +12,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.xml.bind.ValidationException;
@@ -19,6 +20,7 @@ import java.util.Map;
 
 @RestControllerAdvice
 @ControllerAdvice
+@Slf4j
 public class HandleRequest extends ResponseEntityExceptionHandler {
 
     /**
@@ -52,11 +54,11 @@ public class HandleRequest extends ResponseEntityExceptionHandler {
      * @return - response
      */
     @ExceptionHandler(Exception.class)
-    public static ResponseEntity<ResponseDto<Object>> handleAllExceptions(CustomException ex) {
+    public static ResponseEntity<ResponseDto<Object>> handleAllExceptions(Exception ex, WebRequest request) {
         CustomErrorResponse customErrorResponse = ErrorMapper.getCustomErrorResponse(ex);
         ResponseDto<Object> responseDto = ResponseDto.build()
                 .withHttpStatus(customErrorResponse.getHttpStatus())
                 .withMessage(customErrorResponse.getMessage());
-        return ResponseEntity.status(ex.getHttpStatus()).body(responseDto);
+        return ResponseEntity.status(customErrorResponse.getStatus()).body(responseDto);
     }
 }

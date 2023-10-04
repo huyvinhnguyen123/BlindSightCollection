@@ -37,8 +37,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("api/v1/register").permitAll()
                         .requestMatchers("api/v1/login").permitAll()
-                        .requestMatchers("api/v1/create/**").permitAll()
-                        .requestMatchers("api/v1/users/**").hasAnyRole(ADMIN, USER)
+                        .requestMatchers("api/v1/create/admin/ZbGkKnmOqkllQIe9").permitAll()
+                        .requestMatchers("api/v1/users/").hasRole(ADMIN)
+                        .requestMatchers("api/v1/users/user/update").hasRole(USER)
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exceptionHandling -> exceptionHandling
